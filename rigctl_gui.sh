@@ -385,7 +385,7 @@ Hamlib and FLRig models don't use the Serial Port or Speed settings.  Set them t
 
 	yad --paned --key="$fkey" --buttons-layout=center --width=500 --height=700 \
   		--borders=20 \
-		--posx=30 --posy=70 \
+		--geometry=0x0+30+70 \
 		--title="$TITLE" --window-icon="system-search" \
 		--button="<b>Leave rigctld as-is &#x26; Exit</b>":3 \
 		--button="<b>Stop rigctld &#x26; Exit</b>":2 \
