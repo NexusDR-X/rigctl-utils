@@ -205,7 +205,9 @@ SCRIPT_HEADSIZE=$(grep -sn "^# END_OF_HEADER" ${0} | head -1 | cut -f1 -d:)
 VERSION="$(ScriptInfo version | grep version | tr -s ' ' | cut -d' ' -f 4)"
 
 TITLE="Hamlib Rig Control (rigctld) Configuration $VERSION"
-CONFIG_FILE="$HOME/rigctld.conf"
+CONFIG_DIR="$HOME/.config/nexus"
+[[ -f "$HOME/rigctld.conf" ]] && mv "$HOME/rigctld.conf" "$CONFIG_DIR/"
+CONFIG_FILE="$CONFIG_DIR/rigctld.conf"
 MESSAGE="Hamlib rigctld Configuration"
 
 PAT_VERSION="$(pat version | cut -d' ' -f2)"
