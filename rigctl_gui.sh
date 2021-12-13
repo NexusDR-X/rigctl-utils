@@ -210,8 +210,10 @@ CONFIG_DIR="$HOME/.config/nexus"
 CONFIG_FILE="$CONFIG_DIR/rigctld.conf"
 MESSAGE="Hamlib rigctld Configuration"
 
-PAT_VERSION="$(pat version | cut -d' ' -f2)"
-[[ $PAT_VERSION =~ v0.1[01]. ]] && PAT_CONFIG="$HOME/.wl2k/config.json" || PAT_CONFIG="$HOME/.config/pat/config.json"
+#PAT_VERSION="$(pat version | cut -d' ' -f2)"
+#[[ $PAT_VERSION =~ v0.1[01]. ]] && PAT_CONFIG="$HOME/.wl2k/config.json" || 
+PAT_CONFIG="$HOME/.config/pat/config.json"
+[[ -f "$HOME/.wl2k/config.json" ]] && mv "$HOME/.wl2k/config.json" "$PAT_CONFIG"
 export PAT_CONFIG=$PAT_CONFIG
 export find_cmd='@bash -c "runFind "%1""'
 export view_remove_cmd='bash -c "viewDeleteAliases"'
