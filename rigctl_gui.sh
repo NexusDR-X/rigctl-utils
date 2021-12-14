@@ -14,7 +14,7 @@
 #%
 #================================================================
 #- IMPLEMENTATION
-#-    version         ${SCRIPT_NAME} 1.0.5
+#-    version         ${SCRIPT_NAME} 1.0.6
 #-    author          Steve Magnuson, AG7GN
 #-    license         CC-BY-SA Creative Commons License
 #-    script_id       0
@@ -373,7 +373,7 @@ Hamlib and FLRig models don't use the Serial Port or Speed settings.  Set them t
 		--columns=2 \
   	 	--item-separator="|" \
 	 	--field="<b>Rig search string</b>" "" \
- 	--field="gtk-find":FBTN "$find_cmd" \
+ 	--field="Find":FBTN "$find_cmd" \
 	 	--field="<b>Serial Port</b>":CB "$(getSerialPorts "${F[_PORT_]}")" \
 	 	--field="<b>Speed</b>":CB "$(getSpeeds "${F[_SPEED_]}")" >$TMPDIR/RIG_PARAMS.txt &
 	YAD_PIDs+=( $! )
