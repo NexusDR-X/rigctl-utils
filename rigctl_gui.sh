@@ -14,7 +14,7 @@
 #%
 #================================================================
 #- IMPLEMENTATION
-#-    version         ${SCRIPT_NAME} 1.0.6
+#-    version         ${SCRIPT_NAME} 1.0.7
 #-    author          Steve Magnuson, AG7GN
 #-    license         CC-BY-SA Creative Commons License
 #-    script_id       0
@@ -329,7 +329,7 @@ do
 		COM="$(command -v rigctld) -m ${RIG%%|*} $PORT $SPEED"
 		$(command -v rigctld) -m ${RIG%%|*} $PORT $SPEED 2>$TMPDIR/rigctld_error.txt &
    	rigctld_PID=$!
-		if ! pgrep rigctld >/dev/null && [[ -s $TMPDIR/rigctld_error.txt ]]
+		if ! pgrep -x rigctld >/dev/null && [[ -s $TMPDIR/rigctld_error.txt ]]
 		then
 			yad --center --title="Hamlib rigctld ERROR" --text-align=center --borders=30 --width=600 --text-wrap \
 				--text="<big><b>$COM\n<span color='red'>failed!</span></b>\nError message:</big>\n" --buttons-layout=center \
@@ -339,7 +339,7 @@ do
 		rm -f $TMPDIR/rigctld_error.txt
 		RESTART_RIGCTLD=FALSE
 	fi
-	if pgrep rigctld >/dev/null
+	if pgrep -x rigctld >/dev/null
 	then # rigctld already running
 		# Determine rig ID of running rigctld process
 		ID="$(cat /proc/$(pidof rigctld)/cmdline | tr -d '\0' | tr '-' '\n' | egrep "^m[0-9]{1,4}" | sed -e 's/^m//')"
@@ -394,6 +394,7 @@ Hamlib and FLRig models don't use the Serial Port or Speed settings.  Set them t
 		--button="<b>Stop rigctld</b>":1 \
 		--button="<b>Save Changes &#x26; [Re]start rigctld</b>":0
 	RETURN_CODE=$?	
+	YAD_PIDs+=( $RETURN_CODE )
 	
 	case $RETURN_CODE in
 		0) # Read and handle the Configure TNC tab yad output
